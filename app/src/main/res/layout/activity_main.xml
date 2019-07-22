@@ -19,6 +19,7 @@
 
 
     <LinearLayout
+        android:visibility="visible"
         android:orientation="vertical"
         android:id="@+id/container_logo"
         android:layout_centerInParent="true"
@@ -39,6 +40,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+
             android:id="@+id/ball"
             android:src="@drawable/roulette_ball"
             android:layout_width="20dp"

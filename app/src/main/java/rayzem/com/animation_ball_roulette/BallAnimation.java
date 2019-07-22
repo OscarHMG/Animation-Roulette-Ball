@@ -44,15 +44,24 @@ public class BallAnimation extends Animation {
     private float degree;
     int index;                      //Index of the sector randomly generated
 
+    private boolean isInfiniteAnim;
+
     private static final float HALF_SECTOR = 360f/ 37f / 2f;
 
 
-    public BallAnimation(View view, float radius){
+    public BallAnimation(View view, float radius, boolean isInfiniteAnim){
         this.view = view;
         this.radius = radius;
-        index = (new Random().nextInt(38));
-        degree = (HALF_SECTOR * 2) * index;
-        //Log.i("OSCAR", ""+sectorsWheel[index]);
+        this.isInfiniteAnim = isInfiniteAnim;
+        //If the animation when ball stop
+        if(!isInfiniteAnim) {
+            index = (new Random().nextInt(38));
+            degree = (HALF_SECTOR * 2) * index;
+        }else{
+            index = 0;
+            degree = 360f;
+        }
+
     }
 
     @Override
@@ -81,9 +90,10 @@ public class BallAnimation extends Animation {
         }
 
 
+
         //float angleDeg = (interpolatedTime * 360f + 90) % 360;
 
-        Log.i("InterpolatedTime", ""+interpolatedTime);
+        Log.i("DEGREE", ""+degree);
 
         //float angleDeg = (interpolatedTime  * 360f + 90) % 360;
 
@@ -111,6 +121,10 @@ public class BallAnimation extends Animation {
 
 
         t.getMatrix().setTranslate(dx, dy);
+
+        
+
+
     }
 
     public static Sector[] getSectorsWheel() {
@@ -123,9 +137,12 @@ public class BallAnimation extends Animation {
 
     public void setIndex(int index) {
         this.index = index;
+
     }
 
     public Sector getSectorWheelResult(){
         return sectorsWheel[index];
     }
+
+
 }
