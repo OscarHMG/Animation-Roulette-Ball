@@ -140,8 +140,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 winnerSector.setText("Winner: "+ stoppedAnim.getSectorWheelResult().toString());
                 //ball.clearAnimation();
 
-                container_roulette.setVisibility(View.GONE);
-                container_logo.setVisibility(View.VISIBLE);
+                /*container_roulette.setVisibility(View.GONE);
+                container_logo.setVisibility(View.VISIBLE);*/
             }
 
             @Override
@@ -195,15 +195,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if((now - mRotationTime) > ROTATION_WAIT_TIME_MS){
             if(event.sensor.getType() == Sensor.TYPE_GYROSCOPE){
 
-                if(Math.abs(event.values[2]) > 8){
-
+                if(Math.abs(event.values[2]) > 3){
+                    winnerSector.setText("");
                     container_roulette.setVisibility(View.GONE);
                     container_logo.setVisibility(View.VISIBLE);
 
 
-                }else if(Math.abs(event.values[2])>= 2 && Math.abs(event.values[2]) <=8){
+                }else if(Math.abs(event.values[2])>= 1 && Math.abs(event.values[2]) <=2){
                     container_roulette.setVisibility(View.VISIBLE);
                     container_logo.setVisibility(View.GONE);
+                    winnerSector.setText("");
 
 
                     if(infiniteAnim == null){
@@ -211,17 +212,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
 
 
-                }else if(Math.abs(event.values[2])<= 0){
+                }else if(Math.abs(event.values[2])<= 0.4){
                     //1st when is quiet
                     if(infiniteAnim != null){
-                        infiniteAnim.setRepeatCount(0);
+                        //infiniteAnim.setRepeatCount(0);
 
                         //CHECK THIS LINES
-                        //infiniteAnim.cancel();
+                        infiniteAnim.cancel();
 
 
-                        ball.clearAnimation();
-                        ball.getAnimation().cancel();
+                        //ball.clearAnimation();
+                        //ball.getAnimation().cancel();
                         //initStoppedAnimation();
                     }
 
